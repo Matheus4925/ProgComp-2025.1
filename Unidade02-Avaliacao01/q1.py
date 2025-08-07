@@ -35,6 +35,9 @@ def cpf_valido (cpf):
 def cadastrar_cpf():
     cpf = input("Digite o CPF (somente números): ")
     print ("CPF é valido:", cpf_valido(cpf))
+    if cpf_valido((cpf)) == False:
+        print("CPF inválido!")
+        return
     if cpf in banco_dados:
         print("CPF já cadastrado.")
         print() #Esses prints extras estão em todas as funções e são para pular linhas, para deixar o programa mais organizado e fácil de ler
@@ -180,3 +183,4 @@ def menu():
 #Chamada da função para iniciar o menu
 
 menu()
+
