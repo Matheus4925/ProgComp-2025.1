@@ -33,7 +33,7 @@ def cpf_valido (cpf):
 
 #Função que cadrasta o CPF
 def cadastrar_cpf():
-    cpf = input("Digite o CPF (somente números):")
+    cpf = input("Digite o CPF (somente números): ")
     print ("CPF é valido:", cpf_valido(cpf))
     if cpf in banco_dados:
         print("CPF já cadastrado.")
@@ -50,7 +50,7 @@ def adicionar_mac():
         print("CPF não cadastrado.")
         print()
         return
-    mac = input("Digite o endereço MAC (formato XX:XX:XX:XX:XX:XX): ")
+    mac = input("Digite o endereço MAC: ")
     if mac in banco_dados[cpf]:
         print("MAC já vinculado a este CPF.")
         print()
@@ -178,4 +178,5 @@ def menu():
             print()
 
 #Chamada da função para iniciar o menu
+
 menu()
