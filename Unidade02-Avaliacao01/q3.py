@@ -40,9 +40,9 @@ Ndescoberto2 = True
 while (tentativas < 7) and (acertos != 2):
     while True:
         palavra = input("Digite uma palavra:") #Verifica se a palavra digitada tem ou não 5 letras
+        palavra = palavra.upper() #Colocando a palavra em letras maiúsculas, caso tenha sido digitada com minúsculas
         if len(palavra) != 5:
             print("Palavra inválida!")
-            palavra = palavra.upper() #Colocando a palavra em letras maiúsculas, caso tenha sido digitada com minúsculas
             continue
         if palavra in Palavras_digitidas:
             print("Você já digitou essa palavra!") #Verifica se a palavra já foi digitada anteriormente
@@ -55,24 +55,22 @@ while (tentativas < 7) and (acertos != 2):
     resultado2 = ""
     if Ndescoberto == True:
         for pos in range(len(segredo)): #Observando cada letra da palavra digitada e sua posição para implementar a cor correta
-            letra = palavra[pos]
-            if letra == segredo[pos]:
-                resultado += f"\033[1;42m{letra}\033[0m"  # Verde (letra correta na posição certa)
-            elif letra in segredo:
-                resultado += f"\033[1;43m{letra}\033[0m"  # Amarelo (letra está na palavra, mas posição errada)
+            if palavra[pos] == segredo[pos]:
+                resultado += f"\033[1;42m{palavra[pos]}\033[0m"  # Verde (letra correta na posição certa)
+            elif palavra[pos] in segredo:
+                resultado += f"\033[1;43m{palavra[pos]}\033[0m"  # Amarelo (letra está na palavra, mas posição errada)
             else:
-                resultado += f"\033[1;40m{letra}\033[0m"  # Preto (letra errada)
+                resultado += f"\033[1;40m{palavra[pos]}\033[0m"  # Preto (letra errada)
         print(resultado)
 
     if Ndescoberto2 == True: #Mesma coisa, mas para a segunda palavra
         for pos in range(len(segredo2)):
-            letra = palavra[pos]
-            if letra == segredo2[pos]:
-                resultado2 += f"\033[1;42m{letra}\033[0m"  
-            elif letra in segredo2:
-                resultado2 += f"\033[1;43m{letra}\033[0m"  
+            if palavra[pos] == segredo2[pos]:
+                resultado2 += f"\033[1;42m{palavra[pos]}\033[0m"  
+            elif palavra[pos] in segredo2:
+                resultado2 += f"\033[1;43m{palavra[pos]}\033[0m"  
             else:
-                resultado2 += f"\033[1;40m{letra}\033[0m"  
+                resultado2 += f"\033[1;40m{palavra[pos]}\033[0m"  
         print(resultado2)
 
     tentativas += 1 
