@@ -1,5 +1,4 @@
 import random
-#Listas das palavras que são escolhidas aleatoriamente
 palavras = (
     "ADAGA", "ADUBO", "AMIGO", "ANEXO", "ARAME", "ARARA", "ARROZ",
     "ASILO", "ASTRO", "BAILE", "BAIXA", "BALAO", "BALSA", "BARCO",
@@ -25,64 +24,60 @@ palavras2 = (
     "VALSA", "VENTO", "VERDE", "VISAO", "VINHO", "VIUVO", "ZEBRA"
 )
 
-#Escolhendo as palavras das listas
 segredo = palavras[random.randint(0,len(palavras)-1)]
 segredo2 = palavras2[random.randint(0,len(palavras2)-1)]
 tentativas = 0
 acertos = 0
 
-Palavras_digitidas = list() #Lista em que as palavras digitadas serão armazenadas
+Palavras_digitidas = list()
 
-#Essas variáveis são para após uma palavra ser descoberta, ela não apareça mais
 Ndescoberto = True
 Ndescoberto2 = True
 
 while (tentativas < 7) and (acertos != 2):
     while True:
-        palavra = input("Digite uma palavra:") #Verifica se a palavra digitada tem ou não 5 letras
+        palavra = input("Digite uma palavra:")
+        palavra = palavra.upper()
         if len(palavra) != 5:
             print("Palavra inválida!")
             continue
         if palavra in Palavras_digitidas:
-            print("Você já digitou essa palavra!") #Verifica se a palavra já foi digitada anteriormente
+            print("Você já digitou essa palavra!")
             continue
         else:
-            palavra = palavra.upper() #Colocando a palavra em letras maiúsculas, caso tenha sido digitada com minúsculas
             break
     
-    Palavras_digitidas.append(palavra) #Colocando as palavras digitadas na lista
-    resultado = "" #Onde as palavras com cores serão colocadas
+    Palavras_digitidas.append(palavra)
+    resultado = ""
     resultado2 = ""
     if Ndescoberto == True:
-        for pos in range(len(segredo)): #Observando cada letra da palavra digitada e sua posição para implementar a cor correta
-            letra = palavra[pos]
-            if letra == segredo[pos]:
-                resultado += f"\033[1;42m{letra}\033[0m"  # Verde (letra correta na posição certa)
-            elif letra in segredo:
-                resultado += f"\033[1;43m{letra}\033[0m"  # Amarelo (letra está na palavra, mas posição errada)
+        for pos in range(len(segredo)):
+            if palavra[pos] == segredo[pos]:
+                resultado += f"\033[1;42m{palavra[pos]}\033[0m"  # Verde (letra correta na posição certa)
+            elif palavra[pos] in segredo:
+                resultado += f"\033[1;43m{palavra[pos]}\033[0m"  # Amarelo (letra está na palavra, mas posição errada)
             else:
-                resultado += f"\033[1;40m{letra}\033[0m"  # Preto (letra errada)
+                resultado += f"\033[1;40m{palavra[pos]}\033[0m"  # Preto (letra errada)
         print(resultado)
 
-    if Ndescoberto2 == True: #Mesma coisa, mas para a segunda palavra
+    if Ndescoberto2 == True:
         for pos in range(len(segredo2)):
-            letra = palavra[pos]
-            if letra == segredo2[pos]:
-                resultado2 += f"\033[1;42m{letra}\033[0m"  
-            elif letra in segredo2:
-                resultado2 += f"\033[1;43m{letra}\033[0m"  
+            if palavra[pos] == segredo2[pos]:
+                resultado2 += f"\033[1;42m{palavra[pos]}\033[0m"  
+            elif palavra[pos] in segredo2:
+                resultado2 += f"\033[1;43m{palavra[pos]}\033[0m"  
             else:
-                resultado2 += f"\033[1;40m{letra}\033[0m"  
+                resultado2 += f"\033[1;40m{palavra[pos]}\033[0m"  
         print(resultado2)
 
-    tentativas += 1 
-    print(f"Tentativas: {tentativas}") #Indicando a quantidade de tentaivas 
+    tentativas += 1
+    print(f"Tentativas: {tentativas}")
 
-    if Ndescoberto == True and palavra == segredo: #Verificando se a palavra foi descoberta, para que ela não continue aparecendo enquanto a outra palavra ainda está sendo descoberta
+    if Ndescoberto == True and palavra == segredo:
         acertos += 1
         Ndescoberto = False
         print("Você acertou a primeira palavra!")
-    if Ndescoberto2 == True and palavra == segredo2: #Mesma coisa, mas para a segunda palavra
+    if Ndescoberto2 == True and palavra == segredo2:
         acertos += 1
         Ndescoberto2 = False
         print("Você acertou a segunda palavra!")
@@ -93,7 +88,7 @@ if acertos == 2:
         print("Impossível!")
     if tentativas == 2:
         print("Ninja!")
-    if tentativas == 3:                     #Aqui verifica a quantidade de tentativas para mostrar o desempenho do jogador
+    if tentativas == 3:
         print("Impressionante!")
     if tentativas == 4:
         print("Interessante.")
@@ -102,5 +97,5 @@ if acertos == 2:
     if tentativas == 6:
         print("Foi por pouco.")
 else:
-    print("Suas tentivativas acabaram!")    #Se as tentativas acabarem, serão mostradas as palavras escolhidas
+    print("Suas tentivativas acabaram!")
     print(f"As palavras eram: {segredo} e {segredo2}")
